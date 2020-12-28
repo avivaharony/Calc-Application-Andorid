@@ -20,13 +20,6 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-/*
-        public native double calcEquationJNI2(String equation);
-        public native Calculater2 createCalc();
-        public native DestroyCalc();
-
-    }
-*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,10 +31,7 @@ public class MainActivity extends AppCompatActivity {
         createCalculatorJNI();
 
         Log.e("Calc. onCreate AViv: ", "onCreate1");
-        
-     /*
-        Calculater myCalc = new Calculater();
-      */
+
 
     }
 
@@ -52,43 +42,11 @@ public class MainActivity extends AppCompatActivity {
         Log.e("Calc. onDestroy AViv: ", "onDestroy1");
     }
 
-    public native String stringFromJNI();
-
     public native void createCalculatorJNI();
     public native void destroyCalculatorJNI();
 
-    public native double calcEquationJNI(String equation);
-
     public native CalculatorObject calcEquationWithObjectJNI(String equation);
-/*
-    public void CalculateEquation(View view) {
 
-        EditText equationView = findViewById(R.id.editTextEquation);
-
-        Double result = calcEquationJNI(String.valueOf(equationView.getText()));
-
-        TextView resultView = findViewById(R.id.textview1);
-        resultView.setText(result.toString());
-    }
-
-*/
-//Backup:
-/*
-    public void CalculateEquation(View view) {
-
-        EditText equationView = findViewById(R.id.editTextEquation);
-
-        double result = calcEquationJNI(String.valueOf(equationView.getText()));
-
-        int scale = 2;
-        String resultString = BigDecimal.valueOf(result).setScale(scale, BigDecimal.ROUND_HALF_UP).toPlainString();
-
-        //   TextView resultView = findViewById(R.id.textview1);
-        equationView.setText(resultString);
-        TextView resultView = findViewById(R.id.textview1);
-        resultView.setText(resultString);
-    }
-*/
 
     public void CalculateEquation(View view) {
 
@@ -99,10 +57,8 @@ public class MainActivity extends AppCompatActivity {
         int scale = 2;
         String resultString = BigDecimal.valueOf(resultAndStatus.result).setScale(scale, BigDecimal.ROUND_HALF_UP).toPlainString();
 
-        //   TextView resultView = findViewById(R.id.textview1);
         equationView.setText(resultString);
         TextView resultView = findViewById(R.id.textview1);
-     //   resultView.setText(resultString);
 
         if (resultAndStatus.returnStatus.equals("SUCCESS")){
             resultView.setText(resultString);
@@ -110,14 +66,7 @@ public class MainActivity extends AppCompatActivity {
             resultView.setText(resultAndStatus.returnStatus);
 
         }
-/*
-        if (resultAndStatus.returnStatus.equals("SUCCESS")){
-            resultView.setText(resultString);
-        } else {
-            resultView.setText(Integer.valueOf(resultAndStatus.returnStatus).toString());
 
-        }
-*/
     }
 
 
@@ -125,20 +74,12 @@ public class MainActivity extends AppCompatActivity {
 
     //@RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     public void WriteEquationChar(View view) {
- //       TextView resultView = findViewById(R.id.textview1);
 
         EditText equationView = findViewById(R.id.editTextEquation);
-   //     resultView.setText(result.toString());
-
-  //      EditText equationView = findViewById(R.id.editTextEquation);
-     //   Log.w("WriteEquationChar - Aviv ", view.getDisplay().getName().toString());
         String currentPressedLetter = ((Button)view).getText().toString();
         String currentResult = equationView.getText().toString();
 
-        equationView.setText(currentResult + currentPressedLetter);
-
-   //     equationView.setText(equationView.getText() + "(" , );
- //       equationView.se
+        equationView.setText(String.format("%s%s", currentResult, currentPressedLetter));
 
     }
 
@@ -156,7 +97,6 @@ public class MainActivity extends AppCompatActivity {
             equationView.setText(cuttedEquation);
         }
 
-      //  Log.w("newResult Aviv : ", cuttedEquation);
     }
 
     public void ClearEquation(View view) {
@@ -166,20 +106,11 @@ public class MainActivity extends AppCompatActivity {
 }
 
 
-/*
-calc_t *CalcCreate(void);
-
-enum return_status CalcCalc(calc_t *calc, double *result, const char *equation);
-
-    void CalcDestroy(calc_t *calc);
- */
-
 
 
 class CalculatorObject {
 
     double result;
-   // int returnStatus;
     String returnStatus;
 
 
@@ -187,11 +118,5 @@ class CalculatorObject {
         this.result = result;
         this.returnStatus = returnStatus;
     }
-    /*
-    public CalculatorObject(double result, int returnStatus){
-        this.result = result;
-        this.returnStatus = returnStatus;
-    }
 
-     */
 }

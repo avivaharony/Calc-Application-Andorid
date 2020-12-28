@@ -20,8 +20,7 @@ add_library( # Specifies the name of the library.
              src/main/cpp/stack.c
              src/main/cpp/calc_with_power.c
            #  src/main/cpp/calc_with_power_test.c
-            src/main/cpp/hello-jni.c
-            src/main/cpp/calc-jni.c
+        src/main/cpp/calc-jni.c
         )
 
 #add_executable(calc_exec_test.out
